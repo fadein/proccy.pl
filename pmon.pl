@@ -24,12 +24,11 @@ sleep SLEEPYTIME;
 while (1) {
 
 	%curr = ptabHash(); @currPID = sort { $a <=> $b} keys %curr;
-	print "currPID = (@currPID)\n";
-	print "prevPID = (@prevPID)\n";
+	#print "currPID = (@currPID)\nprevPID = (@prevPID)\n";
 
 	my @diff = sdiff(\@prevPID, \@currPID);
 
-	map { print "Process $curr{$_->[0]}->cmdline has appeared\n" }
+	map { print "Process $curr{$_->[1]}->cmdline has appeared\n" }
 		grep { $_->[0] eq "+" } @diff;
 
 	%prev = %curr; @prevPID = @currPID;
